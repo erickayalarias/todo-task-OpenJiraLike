@@ -8,19 +8,19 @@ export interface EntriesState {
 const Entries_INITIAL_STATE: EntriesState = {
     entries: [{
         _id: uuidv4(),
-        description: "Lorem ipsum dolor sit amet, consectetur",
+        description: "Pending: Lorem ipsum dolor sit amet, consectetur",
         status: "pending",
         createdAt:Date.now()
     },
   {
         _id: uuidv4(),
-        description: "lorem10 ipsum dolor sit amet, consectetur",
+        description: "InProgress: lorem10 ipsum dolor sit amet, consectetur",
         status: "in-progress",
         createdAt:Date.now() - 100000,
     },
    {
         _id: uuidv4(),
-        description: "lorem10 ipsum dolor sit amet, consectetur",
+        description: "Finished:lorem10 ipsum dolor sit amet, consectetur",
         status: "finished",
         createdAt:Date.now() - 1000
     },],
@@ -29,10 +29,21 @@ const Entries_INITIAL_STATE: EntriesState = {
 export const EntriesProvider: FC = ({ children }) => {
     const [state, dispatch] = useReducer(entriesReducer, Entries_INITIAL_STATE);
     
+    const addnewEntry = (description: string) => {
+        const newEntry: Entry = {
+            _id: uuidv4(),
+            description,
+            createdAt: Date.now(),
+            status: "pending"
+        }
+        dispatch({ type: "[Entry] Add-Entry", payload: newEntry });
+    }
     return (
         <EntriesContext.Provider
             value={{
                 ...state,
+                //methods
+                addnewEntry
             }}
         >
             {children}
