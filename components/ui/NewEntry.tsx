@@ -3,13 +3,10 @@ import React, { ChangeEvent, useContext, useState } from "react";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import { EntriesContext } from "../../context/entries";
+import { UIContext } from "../../context/ui";
 export const NewEntry = () => {
-    const {addnewEntry} =useContext(EntriesContext);
-
-    // Change is adding entry to a context
-    // SetisaddingEntry (boolean)
-    //This is going to be a payload tjhat will recieve a true or false
-    const [isAdding, setIsAdding] = useState(false);
+    const { addnewEntry } = useContext(EntriesContext);
+    const {isadding, setIsAdding} = useContext(UIContext);
     const [inputValue, setInputValue] = useState("");
     const [touched, setTouched] = useState(false);
 
@@ -31,7 +28,7 @@ export const NewEntry = () => {
                 paddingX: 1,
             }}
         >
-            {isAdding ? (
+            {isadding ? (
                 <>
                     <TextField
                         fullWidth

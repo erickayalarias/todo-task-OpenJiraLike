@@ -6,7 +6,7 @@ interface ContextProps {
 
    //Methods
    addnewEntry: (description: string) => void
-
+   updateEntry: (entry: Entry) => void
 }
 
 export const EntriesContext= createContext({} as ContextProps);
