@@ -13,24 +13,27 @@ export const EntryList: FC<Props> = ({ status }) => {
 
     const { isDragging, endDragging } = useContext(UIContext);
 
-  const entriesByStatus = useMemo(() => entries.filter(entry => entry.status === status), [entries, status]);
+    const entriesByStatus = useMemo(
+        () => entries.filter((entry) => entry.status === status),
+        [entries, status]
+    );
     const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
         const id = event.dataTransfer.getData("text");
-        const entry = entries.find(entry => entry._id === id)!;
+        const entry = entries.find((entry) => entry._id === id)!;
         entry.status = status;
-        updateEntry(entry)
-        endDragging()
-    }
-
+        updateEntry(entry);
+        endDragging();
+    };
 
     const allowDrop = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-    }
+    };
 
     return (
         //Todo: desde aqui se hace el drop
 
-        <div onDrop={onDropEntry}
+        <div
+            onDrop={onDropEntry}
             onDragOver={allowDrop}
             className={isDragging ? styles.dragging : ""}
         >
@@ -42,13 +45,15 @@ export const EntryList: FC<Props> = ({ status }) => {
                     padding: "3px 5px",
                 }}
             >
-                
-                <List sx={{ opacity: isDragging ? 0.2 : 1, transition: "all .3s" }}>
-            {
-              entriesByStatus.map(entry => (
-                <EntryCard key={entry._id} entry={entry} />
-              ))
-                }
+                <List
+                    sx={{
+                        opacity: isDragging ? 0.2 : 1,
+                        transition: "all .3s",
+                    }}
+                >
+                    {entriesByStatus.map((entry) => (
+                        <EntryCard key={entry._id} entry={entry} />
+                    ))}
                 </List>
             </Paper>
         </div>

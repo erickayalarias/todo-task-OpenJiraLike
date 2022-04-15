@@ -2,11 +2,9 @@ import { Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import { Layout } from "../components/layouts";
 import { EntryList, NewEntry } from "../components/ui";
-import { Navbar } from "../components/ui/Navbar";
-import { Sidebar } from "../components/ui/Sidebar";
-
-
 const HomePage: NextPage = () => {
+
+    
     return (
         <Layout title={"Home - OpenJira"}>
             <Grid container spacing={2}>
